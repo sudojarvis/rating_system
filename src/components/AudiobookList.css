@@ -1,0 +1,94 @@
+.audiobook-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+  }
+  
+  .audiobook-item {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+  }
+  
+  .audiobook-item:hover {
+    transform: translateY(-5px);
+  }
+  
+  .audiobook-cover {
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .audiobook-details {
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  .audiobook-details h2 {
+    font-size: 2em;
+    margin-bottom: 10px;
+  }
+  
+  .audiobook-details h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+  }
+  
+  .audiobook-details p {
+    margin-bottom: 10px;
+  }
+  
+  .audiobook-details h4 {
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  form label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  
+  form button {
+    align-self: flex-start;
+    padding: 8px 16px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .review {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 10px;
+  }
+  
+  .review p {
+    margin: 5px 0;
+  }
+  
+  .review p strong {
+    font-weight: bold;
+  }
+  
+  .review p:last-child {
+    margin-bottom: 0;
+  }
+  
