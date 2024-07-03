@@ -1,6 +1,7 @@
 const express= require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+require('dotenv').config();
 const app = express();
 
 const cors = require('cors');
@@ -10,7 +11,10 @@ app.use(cors());
 
 app.use(bodyParser.json());
 
-const uri ='mongodb+srv://admin:admin@cluster0.zzhl3is.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+// const uri ='mongodb+srv://admin:admin@cluster0.zzhl3is.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0'
+
+const uri = process.env.MONGODB_URI;
+
 
 mongoose.connect(uri, {useNewUrlParser: true, useUnifiedTopology: true})
 
@@ -38,16 +42,16 @@ const audiobookSchema = new mongoose.Schema({
     ]
 });
 
-const reviewSchema = new mongoose.Schema({
-    audiobookId: mongoose.Schema.Types.ObjectId,
-    review: String,
-    rating: Number,
+// const reviewSchema = new mongoose.Schema({
+//     audiobookId: mongoose.Schema.Types.ObjectId,
+//     review: String,
+//     rating: Number,
     
-});
+// });
 
 
 const Audiobook = mongoose.model('Audiobook', audiobookSchema);
-const Review = mongoose.model('Review', reviewSchema);
+// const Review = mongoose.model('Review', reviewSchema);
 
 const audiobooks = [
     {
