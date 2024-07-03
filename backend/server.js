@@ -202,13 +202,13 @@ const audiobooks = [
 
 
 
-Audiobook.insertMany(audiobooks)
-.then(() => {
-    console.log('Successfully saved default items to DB');
-})
-.catch((err) => {
-    console.log(err);
-});
+// Audiobook.insertMany(audiobooks)
+// .then(() => {
+//     console.log('Successfully saved default items to DB');
+// })
+// .catch((err) => {
+//     console.log(err);
+// });
 
 
 
