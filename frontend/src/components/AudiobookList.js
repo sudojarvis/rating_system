@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './AudiobookList.css'; // Import the CSS file
+import { baseUrl } from './BaseUrl';
 
 const AudiobookList = () => {
   const [audiobooks, setAudiobooks] = useState([]);
@@ -16,7 +17,9 @@ const AudiobookList = () => {
   useEffect(() => {
     const fetchAudiobooks = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/audiobooks');
+        // const response = await fetch('http://localhost:3000/api/audiobooks');
+        // const response = await fetch(`${process.env.REACT_APP_API_BASE_URL}/api/audiobooks/`);
+        const response = await fetch(`${baseUrl}/audiobooks/`);
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }

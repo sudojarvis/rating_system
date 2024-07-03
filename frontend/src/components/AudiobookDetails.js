@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import ReviewForm from './ReviewForm';
 import ReviewList from './ReviewList';
-import './AudiobookDetails.css'; // Import the CSS file
+import './AudiobookDetails.css'; 
+import { baseUrl } from './BaseUrl';
 
 const AudiobookDetails = () => {
   const { id } = useParams();
@@ -13,7 +14,8 @@ const AudiobookDetails = () => {
   useEffect(() => {
     const fetchAudiobook = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/api/audiobooks/${id}`);
+        // const response = await fetch(`http://localhost:3000/api/audiobooks/${id}`);
+        const response = await fetch(`${baseUrl}/audiobooks/${id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch audiobook details');
         }

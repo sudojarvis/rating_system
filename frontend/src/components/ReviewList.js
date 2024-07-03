@@ -10,8 +10,8 @@ const ReviewList = ({ reviews }) => {
     <div className="review-list">
       {reviews.map((review, index) => (
         <div key={index} className="review-card">
-          <h5 className="review-user">{review.user}</h5> {/* Display the reviewer's name */}
-          <p className="review-comment">{review.comment}</p> {/* Changed from `text` to `comment` */}
+          <h5 className="review-user">{review.user}</h5> 
+          <p className="review-comment">{review.comment}</p> 
           <p className="review-rating">Rating: {review.rating}</p>
           {/* <small>{new Date(review.date).toLocaleDateString()}</small> Optionally format the date */}
         </div>

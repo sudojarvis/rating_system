@@ -49,7 +49,7 @@ This project is a full-stack audiobook application built with Node.js, Express, 
    npm start
    ```
 
-   This will start the backend server at `http://localhost:3001`.
+   This will start the backend server at `http://localhost:3000`.
 
 
 First start the backend server and then start the frontend server.
@@ -77,11 +77,16 @@ First start the backend server and then start the frontend server.
 
 3. Run the application:
 
+   Update the BaseUrl in the frontend/src/baseUrl.js file to the backend server URL(`http://localhost:3000/api`).
+
    ```bash
    npm start
    ```
 
-   This will start the React development server and open the application in your default web browser at `http://localhost:3000`.
+   This will start the React development server and open the application in your default web browser at `http://localhost:3001`.
+
+
+
 
 ## Application Overview
 
