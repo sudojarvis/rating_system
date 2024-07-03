@@ -6,6 +6,8 @@ This project is a full-stack audiobook application built with Node.js, Express, 
 The aplication is deployed on render and can be accessed at [Audiobook Application](https://rating-system-1.onrender.com/).
 
 URL access might be slow as the application is hosted on a free tier.
+Or
+You can run the application locally by following the instructions below.
 
 
 ## Backend Setup
