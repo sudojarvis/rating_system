@@ -1,75 +1,128 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Filter from './Filter';
+import './AudiobookList.css'; // Import the CSS file
 
 const AudiobookList = () => {
   const [audiobooks, setAudiobooks] = useState([]);
   const [filteredAudiobooks, setFilteredAudiobooks] = useState([]);
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [filters, setFilters] = useState({
+    genre: '',
+    author: '',
+    rating: ''
+  });
 
   useEffect(() => {
-    const sampleAudiobooks = [
-      {
-        id: 1,
-        title: "The Great Gatsby",
-        author: "F. Scott Fitzgerald",
-        genre: "Classic",
-        rating: 4.5,
-        coverImage: "https://example.com/great-gatsby.jpg"
-      },
-      {
-        id: 2,
-        title: "1984",
-        author: "George Orwell",
-        genre: "Dystopian",
-        rating: 4.8,
-        coverImage: "https://example.com/1984.jpg"
-      },
-      {
-        id: 3,
-        title: "To Kill a Mockingbird",
-        author: "Harper Lee",
-        genre: "Classic",
-        rating: 4.7,
-        coverImage: "https://example.com/to-kill-a-mockingbird.jpg"
+    const fetchAudiobooks = async () => {
+      try {
+        const response = await fetch('http://localhost:3000/api/audiobooks');
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const data = await response.json();
+        setAudiobooks(data);
+        setFilteredAudiobooks(data);
+        setLoading(false);
+      } catch (error) {
+        console.error('Error fetching audiobooks:', error);
+        setError(error.message);
+        setLoading(false);
       }
-    ];
+    };
 
-    setAudiobooks(sampleAudiobooks);
-    setFilteredAudiobooks(sampleAudiobooks);
+    fetchAudiobooks();
   }, []);
 
-  const handleFilterChange = (filters) => {
+  useEffect(() => {
     let filtered = audiobooks;
 
     if (filters.genre) {
       filtered = filtered.filter(audiobook => audiobook.genre === filters.genre);
     }
+
     if (filters.author) {
-      filtered = filtered.filter(audiobook => audiobook.author === filters.author);
+      filtered = filtered.filter(audiobook => audiobook.author.toLowerCase().includes(filters.author.toLowerCase()));
     }
+
     if (filters.rating) {
       filtered = filtered.filter(audiobook => audiobook.rating >= filters.rating);
     }
 
     setFilteredAudiobooks(filtered);
+  }, [filters, audiobooks]);
+
+  const handleFilterChange = (e) => {
+    const { name, value } = e.target;
+    setFilters({
+      ...filters,
+      [name]: value
+    });
   };
 
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
-    <div>
-      <Filter onFilterChange={handleFilterChange} />
-      <div className="audiobook-list">
-        {filteredAudiobooks.map(audiobook => (
-          <div key={audiobook.id} className="audiobook-item">
-            <Link to={`/audiobooks/${audiobook.id}`}>
-              <img src={audiobook.coverImage} alt={audiobook.title} className="audiobook-cover" />
-              <h3>{audiobook.title}</h3>
-              <p>{audiobook.author}</p>
-              <p>Genre: {audiobook.genre}</p>
-              <p>Rating: {audiobook.rating}</p>
-            </Link>
-          </div>
-        ))}
+    <div className="audiobook-list-container">
+      <div className="filters">
+        <label>
+          Genre:
+          <select name="genre" value={filters.genre} onChange={handleFilterChange}>
+            <option value="">All</option>
+            <option value="Fiction">Fiction</option>
+            <option value="Non-Fiction">Non-Fiction</option>
+            <option value="Mystery">Mystery</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Science Fiction">Science Fiction</option>
+            <option value="Romance">Romance</option>
+            <option value="Thriller">Thriller</option>
+          </select>
+        </label>
+        <label>
+          Author:
+          <input
+            type="text"
+            name="author"
+            value={filters.author}
+            onChange={handleFilterChange}
+            placeholder="Search by author"
+          />
+        </label>
+        <label>
+          Rating:
+          <input
+            type="number"
+            name="rating"
+            value={filters.rating}
+            onChange={handleFilterChange}
+            placeholder="Minimum rating"
+          />
+        </label>
       </div>
+
+      {filteredAudiobooks.length > 0 ? (
+        <div className="audiobook-list">
+          {filteredAudiobooks.map((audiobook) => (
+            <div key={audiobook._id} className="audiobook-card">
+              <img src={audiobook.coverImage} alt={audiobook.title} className="audiobook-cover" />
+              <h2>{audiobook.title}</h2>
+              <h3>by {audiobook.author}</h3>
+              <p><strong>Genre:</strong> {audiobook.genre}</p>
+              <p><strong>Description:</strong> {audiobook.description}</p>
+              <p><strong>Rating:</strong> {audiobook.rating}</p>
+              <Link to={`/audiobooks/${audiobook._id}`} className="details-link">View details</Link>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>No audiobooks found</div>
+      )}
     </div>
   );
 };
