@@ -94,6 +94,43 @@ First start the backend server and then start the frontend server.
 
 
 
+## Endpoints
+
+### Get All Audiobooks
+
+- **URL:** `/api/audiobooks`
+- **Method:** `GET`
+- **Response:**
+  - **Success:** 200 OK
+  - **Failure:** 404 Not Found, 500 Internal Server Error
+- **Description:** Retrieves a list of audiobooks, optionally filtered by genre, author, and minimum rating.
+
+### Get Audiobook by ID
+
+- **URL:** `/api/audiobooks/:id`
+- **Method:** `GET`
+- **Response:**
+  - **Success:** 200 OK
+  - **Failure:** 500 Internal Server Error
+- **Description:** Retrieves a specific audiobook by its ID.
+
+### Add Review to Audiobook
+
+- **URL:** `/api/audiobooks/:id/reviews`
+- **Method:** `POST`
+- **Request Body:**
+  ```json
+  {
+    "name": "User Name",
+    "rating": 4.5,
+    "comment": "Review comment"
+  }
+  ```
+- **Response:**
+  - **Success:** 201 Created
+  - **Failure:** 404 Not Found, 500 Internal Server Error
+- **Description:** Adds a review to a specific audiobook by its ID.
+
 
 ## Application Overview
 
@@ -113,7 +150,6 @@ The audiobook application consists of two main parts:
 
 - **React**: A JavaScript library for building user interfaces.
 - **react-router-dom**: Declarative routing for React.
-- **axios**: Promise-based HTTP client for making requests to the backend APIs.
 
 ### Libraries Used
 
@@ -134,7 +170,4 @@ The audiobook application consists of two main parts:
 - **backend/**: Contains the Node.js backend server.
 - **frontend/**: Contains the React frontend application.
 
-### Contributing
-
-Contributions are welcome! Please fork this repository and create a pull request with your changes.
 
