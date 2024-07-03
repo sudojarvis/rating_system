@@ -3,6 +3,11 @@
 
 This project is a full-stack audiobook application built with Node.js, Express, MongoDB, and React.
 
+The aplication is deployed on render and can be accessed at [Audiobook Application](https://rating-system-1.onrender.com/).
+
+URL access might be slow as the application is hosted on a free tier.
+
+
 ## Backend Setup
 
 ### Prerequisites
